@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 const Logo = ({ className }) => {
   return (
     <div className={`${className}`}>
-      <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000.000000 1000.000000" preserveAspectRatio="xMidYMid meet">
+      <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000.000000 1000.000000" preserveAspectRatio="xMidYMid meet" role="img">
+        <title>Logo</title>
         <g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" stroke="none">
           <path d="M370 8355 l0 -1295 1295 0 1295 0 0 1295 0 1295 -1295 0 -1295 0 0
           -1295z m2220 0 l0 -925 -925 0 -925 0 0 925 0 925 925 0 925 0 0 -925z"/>

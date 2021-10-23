@@ -8,10 +8,10 @@ const NotFound = () => {
       <div className="px-10 py-8 rounded-3xl bg-gray-200 dark:bg-gray-800 flex flex-col items-center space-y-8 select-none">
         <div className="flex flex-col items-center space-y-5">
           <span className="font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl">
-            Error 404
+            {'Error 404'}
           </span>
           <span className="uppercase font-extralight text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            Page not found.
+            {'Page not found.'}
           </span>
 
         </div>
