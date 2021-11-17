@@ -14,7 +14,6 @@ export default function Login() {
       };
   
       axios.post("http://localhost:3000/users/all", user).then((response) => console.log(user));
-      //console.log(user)
   };
 
   return (
@@ -26,7 +25,7 @@ export default function Login() {
               <Form>
                 <h1 className="text-center mt-2 p-5">Login</h1>
                 <Form.Group id="username">
-                  <Form.Label>Usernanme</Form.Label>
+                  <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="username"
                     value={username}

@@ -15,7 +15,6 @@ export default function Signup() {
     };
 
     axios.post("http://localhost:3000/users/all", user).then((response) => console.log(user));
-    //console.log(user)
   };
 
   return (
