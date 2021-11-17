@@ -9,6 +9,9 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { default as PublicLayout } from "./layouts/Public";
 import { subjects } from './testing/subjects';
 import { userTeacher } from './testing/userTeacher';
+import DashboardProfesor from './views/DashboardProfesor';
+import DashboardStudent from './views/DashboardStudent';
+import DashboardAdmin from './views/DashboardAdmin';
 
 const App = () => {
   return (
@@ -27,6 +30,9 @@ const App = () => {
           <Route path="/profile" exact>
             <Profile user={userTeacher} subjects={subjects} />
           </Route>
+          <Route path="/professor/dashboard" component={DashboardProfesor} exact />
+          <Route path="/student/dashboard" component={DashboardStudent} exact />
+          <Route path="/admin/dashboard" component={DashboardAdmin} exact />
           <Route path="*" component={NotFound} />
         </Switch>
       </PublicLayout>
