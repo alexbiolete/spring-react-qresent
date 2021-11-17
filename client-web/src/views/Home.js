@@ -1,11 +1,8 @@
-import Logo from '../resources/Logo';
-
 const Home = () => {
   return (
     <>
       <header className="w-full min-h-screen h-full flex justify-center items-center">
-        <div className="p-5 rounded-3xl bg-gray-200 dark:bg-gray-800 flex flex-col items-center space-y-4 transition ease-in-out duration-300 hover:shadow-2xl dark:hover:shadow-none md:transform hover:scale-150 cursor-not-allowed">
-          <Logo className="w-36 sm:w-48 md:w-60 lg:w-72 xl:w-96 h-12 sm:h-16 md:h-60 lg:h-24 xl:h-32 fill-current" />
+        <div className="p-10 rounded-3xl bg-gray-200 dark:bg-gray-800 flex flex-col items-center space-y-4 transition ease-in-out duration-300 hover:shadow-2xl dark:hover:shadow-none md:transform hover:scale-150 cursor-not-allowed">
           <div className="flex flex-col lg:flex-row space-y-2 space-y-2 sm:space-y-4 md:space-y-0 lg:space-x-4 xl:space-x-8">
             <a
               href="https://github.com/alexbiolete/spring-react-qresent"
