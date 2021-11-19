@@ -3,6 +3,7 @@ package com.mps.team3.qresent.controller;
 import com.mps.team3.qresent.dao.Student;
 import com.mps.team3.qresent.dao.Subject;
 import com.mps.team3.qresent.service.SubjectService;
+import com.mps.team3.qresent.service.SubjectTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,10 @@ public class SubjectController {
     @DeleteMapping
     public ResponseEntity deleteSubject(@RequestParam(name = "subjectId") int subjectId) {
         return ResponseEntity.status(HttpStatus.OK).body(subjectService.delete(subjectId));
+    }
+
+    @GetMapping("/all/byTeacher")
+    public ResponseEntity findAllSubjectByTeacherId(@RequestParam(name = "teacherId") int teacherId) {
+        return ResponseEntity.status(HttpStatus.OK).body(subjectService.findAllSubjectByTeacherId(teacherId));
     }
 }
