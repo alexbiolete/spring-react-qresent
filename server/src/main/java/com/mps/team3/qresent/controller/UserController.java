@@ -1,5 +1,6 @@
 package com.mps.team3.qresent.controller;
 
+import com.mps.team3.qresent.dao.LoginForm;
 import com.mps.team3.qresent.dao.User;
 import com.mps.team3.qresent.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,13 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity deleteUser(@RequestParam(name = "userId") int userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.delete(userId));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginForm loginForm) {
+        User user = userService.login(loginForm.getUsername(), loginForm.getPassword());
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not exist");
+        else return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
