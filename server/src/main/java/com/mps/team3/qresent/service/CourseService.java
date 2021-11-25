@@ -1,7 +1,6 @@
 package com.mps.team3.qresent.service;
 
 import com.mps.team3.qresent.dao.Course;
-import com.mps.team3.qresent.dao.Student;
 import com.mps.team3.qresent.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

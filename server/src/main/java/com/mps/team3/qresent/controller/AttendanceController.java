@@ -1,7 +1,6 @@
 package com.mps.team3.qresent.controller;
 
 import com.mps.team3.qresent.dao.Attendance;
-import com.mps.team3.qresent.dao.Student;
 import com.mps.team3.qresent.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
