@@ -13,7 +13,7 @@ export default function Login() {
         password: password,
       };
   
-      axios.post("http://localhost:3000/users/all", user).then((response) => console.log(user));
+      axios.post("http://localhost:3000/api/login", user).then((response) => console.log(user));
   };
 
   return (

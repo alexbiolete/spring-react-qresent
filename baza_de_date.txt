@@ -130,4 +130,48 @@ CREATE TABLE `qresent`.`subject_student` (
     ON UPDATE CASCADE);
 
 
+CREATE TABLE `qresent`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE);
+
+
+CREATE INDEX index_user_role ON user (role);
+
+CREATE TABLE `qresent`.`subject_user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `subject_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `user_role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_subject_user_id_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_subject_user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `qresent`.`user` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+ALTER TABLE `qresent`.`attendance` 
+DROP FOREIGN KEY `fk_attendance_student`;
+ALTER TABLE `qresent`.`attendance` 
+ADD INDEX `fk_attendance_student_idx` (`student_id` ASC) VISIBLE,
+DROP INDEX `fk_attendance_student_idx` ;
+;
+ALTER TABLE `qresent`.`attendance` 
+ADD CONSTRAINT `fk_attendance_student`
+  FOREIGN KEY (`student_id`)
+  REFERENCES `qresent`.`user` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
 

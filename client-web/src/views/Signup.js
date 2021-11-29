@@ -14,7 +14,7 @@ export default function Signup() {
       password: password,
     };
 
-    axios.post("http://localhost:3000/users/all", user).then((response) => console.log(user));
+    axios.post("http://localhost:3000/api/signup", user).then((response) => console.log(user));
   };
 
   return (
