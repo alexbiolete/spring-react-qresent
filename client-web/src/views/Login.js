@@ -1,21 +1,49 @@
 import { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import WrapperForm from '../components/molecules/WrapperForm';
 import WrapperInput from '../components/molecules/WrapperInput';
 import ButtonPrimary from '../components/atoms/ButtonPrimary';
 import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
 
-export default function Login() {
+export default function Login({ setUserType, setAuthenticatedUserName }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = () => {
+  const history = useHistory();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const user = {
-        username: username,
-        password: password,
+        "username": username,
+        "password": password,
       };
+    axios.post("http://localhost:8081/user/login", user)
+      .then(response => {
+        if (response.data.role == "student") {
+          history.push("/student/dashboard");
+          setUserType("student");
+        }
 
-      axios.post("http://localhost:3000/api/login", user).then((response) => console.log(user));
+        if (response.data.role == "teacher") {
+          history.push("/professor/dashboard");
+          setUserType("professor");
+        }
+
+        if (response.data.role == "admin") {
+          history.push("/admin/dashboard");
+          setUserType("admin");
+        }
+
+        if (response.data.username == "" && response.data.password == "")
+            history.push("/login");
+
+        localStorage.setItem('user_id', response.data.id);
+        localStorage.setItem('user_name', response.data.name);
+        localStorage.setItem('user_username', response.data.username);
+        localStorage.setItem('user_email', response.data.email);
+        })
+      .catch((response) => {
+        history.push("/signup");
+      });
   };
 
   return (
@@ -44,7 +72,7 @@ export default function Login() {
 
         <div className="flex items-center justify-end space-x-3 p-3 bg-gray-50 text-right">
           <LinkOutlineSecondary to='/signup' title="Sign up" />
-          <ButtonPrimary title="Log in" type="submit" onClick={() => handleSubmit()} />
+          <ButtonPrimary title="Log in" type="submit" onClick={(e) => handleSubmit(e)} />
         </div>
       </form>
     </WrapperForm>

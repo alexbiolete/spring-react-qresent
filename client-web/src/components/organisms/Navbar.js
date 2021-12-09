@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Logo from '../../resources/Logo';
 import NavbarTabs from '../molecules/NavbarTabs';
 
-const Navbar = () => {
+const Navbar = ({ userType, authenticatedUserName }) => {
   return (
     <>
       <nav className="z-50 fixed top-0 bg-white w-full h-16 border-t md:border-t-0 border-gray-100 shadow-sm flex items-center">
@@ -15,7 +15,7 @@ const Navbar = () => {
               <Logo className="w-36 h-12 fill-current" />
             </div>
             <div className="flex-1 hidden md:flex justify-between md:justify-evenly space-x-2 md:space-x-6">
-              <NavbarTabs />
+              <NavbarTabs userType={userType} />
             </div>
             {/* TO DO: Responsive navbar menu */}
             <div className="flex-1 inline-flex items-center justify-end">
@@ -32,7 +32,7 @@ const Navbar = () => {
                   </svg>
                 </span>
                 <span className="hidden md:block font-medium text-sm">
-                  {'Account'}
+                  {authenticatedUserName}
                 </span>
               </Link>
             </div>

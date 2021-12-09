@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Table from '../components/organisms/Table';
 
-const Profile = ({ user, subjects }) => {
+const Profile = ({ subjects, authenticatedUserName, authenticatedUserUsername, authenticatedUserEmail }) => {
   const columns = useMemo(
     () => [
       {
@@ -22,15 +23,15 @@ const Profile = ({ user, subjects }) => {
         <div className="rounded-lg shadow p-4 space-y-4">
           <div className="mx-auto rounded-full shadow-md w-32 h-32 flex justify-center items-center">
             <span className="font-semibold uppercase text-5xl">
-              {user.name.substring(0, 2)}
+              {authenticatedUserName.substring(0, 2)}
             </span>
           </div>
           <div>
             <h1 className="font-semibold uppercase text-center text-xl">
-              {user.name}
+              {authenticatedUserName}
             </h1>
             <h2 className="font-light tracking-wider lowercase text-center text-lg">
-              {'@'}{user.username}
+              {'@'}{authenticatedUserUsername}
             </h2>
           </div>
           <div className="flex items-center space-x-1 px-4">
@@ -38,13 +39,20 @@ const Profile = ({ user, subjects }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <span className="tracking-wide text-sm">
-              {user.email}
+              {authenticatedUserEmail}
             </span>
           </div>
         </div>
       </div>
       <div className="col-span-1 md:col-span-3">
-        <Table columns={columns} data={subjects} />
+        {/* <Table columns={columns} data={subjects} /> */}
+        {subjects.map((subject) => {
+          return (
+            <div>
+              <Link to={`/subject/${subject.id}`}>{subject.name}</Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import WrapperForm from '../components/molecules/WrapperForm';
 import WrapperInput from '../components/molecules/WrapperInput';
@@ -7,17 +8,68 @@ import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
 
 export default function Signup() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [List, setList] = useState([]);
+  const [role, setRole] = useState("");
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+  const history = useHistory();
 
-  const handleSubmit = () => {
+  const handleChange1 = () => {
+      setChecked1(!checked1);
+      if (checked2 === true) {
+        setChecked2(false);
+      }
+      if (checked1 === false)
+        setRole("teacher");
+  };
+
+  const handleChange2 = () => {
+      setChecked2(!checked2);
+      if (checked1 === true)
+        setChecked1(false);
+      if(checked2 === false)
+        setRole("student");
+  };
+
+  const handleSubmit = (e) => {
+    var verify = true;
     const user = {
-      email: email,
-      username: username,
-      password: password,
+      "name": name,
+      "email": email,
+      "username": username,
+      "password": password,
+      "role": role,
     };
 
-    axios.post("http://localhost:3000/api/signup", user).then((response) => console.log(user));
+    if(name == ''){
+      verify = false;
+    }
+
+    if(email == ''){
+      verify = false;
+    }
+
+    if(username == ''){
+      verify = false;
+    }
+
+    if(password == ''){
+      verify = false;
+    }
+
+    if(role == ""){
+      verify = false;
+    }
+
+    if(verify == true) {
+      history.push("/dashboard");
+    }
+
+  axios.post("http://localhost:8081/user", user).then((response) => console.log(response));
+
   };
 
   return (
@@ -25,6 +77,14 @@ export default function Signup() {
       <form>
         <div className="w-full px-4 py-5 bg-white sm:p-6">
           <div className="flex flex-col items-center space-y-4">
+            <WrapperInput
+              id="name"
+              title="Name"
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              required
+            />
             <WrapperInput
               id="email"
               title="E-mail"
@@ -49,12 +109,29 @@ export default function Signup() {
               value={password}
               required
             />
+
+            <label>
+              <input
+                type="checkbox"
+                checked={checked1}
+                onChange={handleChange1}
+              />
+              Teacher account
+            </label><br />
+            <label>
+              <input
+                type="checkbox"
+                checked={checked2}
+                onChange={handleChange2}
+              />
+              Student account
+            </label>
           </div>
         </div>
 
         <div className="flex items-center justify-end space-x-3 p-3 bg-gray-50 text-right">
           <LinkOutlineSecondary to='/login' title="Log in" />
-          <ButtonPrimary title="Sign up" type="submit" onClick={() => handleSubmit()} />
+          <ButtonPrimary title="Sign up" type="submit" onClick={(e) => handleSubmit(e)} />
         </div>
       </form>
     </WrapperForm>
