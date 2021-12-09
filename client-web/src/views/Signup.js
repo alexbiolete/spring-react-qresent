@@ -1,6 +1,9 @@
-import React, { Component, useImperativeHandle, useRef, useState } from "react";
-import { Form, Button, Card, Row, Col, Container } from "react-bootstrap";
+import { useState } from "react";
 import axios from "axios";
+import WrapperForm from '../components/molecules/WrapperForm';
+import WrapperInput from '../components/molecules/WrapperInput';
+import ButtonPrimary from '../components/atoms/ButtonPrimary';
+import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -18,53 +21,42 @@ export default function Signup() {
   };
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col lg={6} md={6} sm={12} className="m-auto p-5">
-            <div className="LoginBox p-5">
-              <Form>
-                <h1 className="text-center mt-2 p-5">Signup</h1>
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group id="username">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Button
-                  className="w-100 text-center mt-4"
-                  type="submit"
-                  href="/login"
-                  onClick={() => handleSubmit()}
-                >
-                  Signup
-                </Button>
-              </Form>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <WrapperForm>
+      <form>
+        <div className="w-full px-4 py-5 bg-white sm:p-6">
+          <div className="flex flex-col items-center space-y-4">
+            <WrapperInput
+              id="email"
+              title="E-mail"
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+            <WrapperInput
+              id="username"
+              title="Username"
+              type="username"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              required
+            />
+            <WrapperInput
+              id="password"
+              title="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-end space-x-3 p-3 bg-gray-50 text-right">
+          <LinkOutlineSecondary to='/login' title="Log in" />
+          <ButtonPrimary title="Sign up" type="submit" onClick={() => handleSubmit()} />
+        </div>
+      </form>
+    </WrapperForm>
   );
 }

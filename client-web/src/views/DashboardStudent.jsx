@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Card1 from './Card1';
-
+import DashboardCard from '../components/molecules/DashboardCard';
 
 class DashboardProfesor extends Component {
-
-    constructor(props){
+    constructor (props){
         super(props);
         this.state={
             tabs: [
@@ -54,36 +52,36 @@ class DashboardProfesor extends Component {
         console.log('Open Scanner!');
     }
 
-    
+
 
     statisticsHandler = () => {
         console.log('View Stats!');
         let path = 'student/statistics';
         this.props.history.push(path);
     }
-    
+
     render(){
         return(
             <div className="container-fluid d-flex justify-content-center dashboard">
                 <div className="row">
                     <div className="col-md-4">
-                        <Card1 data = {this.state.tabs[0]}/>
+                        <DashboardCard data = {this.state.tabs[0]}/>
                     </div>
                     <div className="col-md-4">
-                        <Card1 data = {this.state.tabs[1]}/>
+                        <DashboardCard data = {this.state.tabs[1]}/>
                     </div>
                     <div className="col-md-4">
-                        <Card1 data = {this.state.tabs[2]}/>
+                        <DashboardCard data = {this.state.tabs[2]}/>
                     </div>
                     <div className="col-md-4">
-                        <Card1 data = {this.state.tabs[3]}/>
+                        <DashboardCard data = {this.state.tabs[3]}/>
                     </div>
                 </div>
             </div>
         );
     }
 
-    
+
 }
 
 export default DashboardProfesor;

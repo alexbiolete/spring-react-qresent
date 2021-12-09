@@ -1,14 +1,8 @@
-import { Fragment } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import Logo from '../resources/Logo';
-import NavbarTabs from './NavbarTabs';
-import NavbarButton from './NavbarButton';
-import NavbarLink from './NavbarLink';
+import Logo from '../../resources/Logo';
+import NavbarTabs from '../molecules/NavbarTabs';
+import NavbarLink from '../atoms/NavbarLink';
 
 const Navbar = () => {
-  let location = useLocation();
-  let history = useHistory();
-
   return (
     <>
       <nav className="z-50 fixed top-0 bg-white w-full h-16 border-t md:border-t-0 border-gray-100 shadow-sm flex items-center">

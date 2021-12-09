@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import Table from 'react-bootstrap/Table'
-
 class DashboardProfesor extends Component {
-
     constructor(props){
         super(props);
     }
@@ -44,7 +41,7 @@ class DashboardProfesor extends Component {
         );
     }
 
-    
+
 }
 
 export default DashboardProfesor;

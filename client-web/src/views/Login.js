@@ -1,7 +1,9 @@
-import React, { Component, useRef, useState, useImperativeHandle } from "react";
-import { Form, Button, Card, Col, Row, Container } from "react-bootstrap";
-import "../asset/Style.css";
+import { useState } from "react";
 import axios from "axios";
+import WrapperForm from '../components/molecules/WrapperForm';
+import WrapperInput from '../components/molecules/WrapperInput';
+import ButtonPrimary from '../components/atoms/ButtonPrimary';
+import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -12,52 +14,39 @@ export default function Login() {
         username: username,
         password: password,
       };
-  
+
       axios.post("http://localhost:3000/api/login", user).then((response) => console.log(user));
   };
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col lg={6} md={6} sm={12} className="m-auto p-5">
-            <div className="LoginBox p-5">
-              <Form>
-                <h1 className="text-center mt-2 p-5">Login</h1>
-                <Form.Group id="username">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>{" "}
-                <br />
-                <a className="m-auto mt-6 p-1" href="/signup">
-                  Don't have an account? Signup
-                </a>
-                <Button
-                  className="w-100 text-center mt-4"
-                  type="submit"
-                  onClick={() => handleSubmit()}
-                >
-                  Login
-                </Button>
-              </Form>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <WrapperForm>
+      <form>
+        <div className="w-full px-4 py-5 bg-white sm:p-6">
+          <div className="flex flex-col items-center space-y-4">
+            <WrapperInput
+              id="username"
+              title="Username"
+              type="username"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              required
+            />
+            <WrapperInput
+              id="password"
+              title="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-end space-x-3 p-3 bg-gray-50 text-right">
+          <LinkOutlineSecondary to='/signup' title="Sign up" />
+          <ButtonPrimary title="Log in" type="submit" onClick={() => handleSubmit()} />
+        </div>
+      </form>
+    </WrapperForm>
   );
 }

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import Table from '../components/Table';
+import Table from '../components/organisms/Table';
 
 const Profile = ({ user, subjects }) => {
   const columns = useMemo(
