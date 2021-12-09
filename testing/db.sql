@@ -1,4 +1,4 @@
-CREATE SCHEMA `qresent` ;
+CREATE SCHEMA `qresent`;
 
 CREATE TABLE `qresent`.`admin` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -58,19 +58,16 @@ CREATE TABLE `qresent`.`course` (
     ON UPDATE CASCADE);
 
 
-ALTER TABLE `qresent`.`student` 
+ALTER TABLE `qresent`.`student`
 DROP INDEX `password_UNIQUE` ,
 DROP INDEX `name_UNIQUE` ;
-;
 
-ALTER TABLE `qresent`.`teacher` 
+ALTER TABLE `qresent`.`teacher`
 DROP INDEX `password_UNIQUE` ,
 DROP INDEX `name_UNIQUE` ;
-;
 
-ALTER TABLE `qresent`.`course` 
+ALTER TABLE `qresent`.`course`
 ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE;
-;
 
 CREATE TABLE `qresent`.`attendance` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -160,18 +157,15 @@ CREATE TABLE `qresent`.`subject_user` (
     ON UPDATE CASCADE);
 
 
-ALTER TABLE `qresent`.`attendance` 
+ALTER TABLE `qresent`.`attendance`
 DROP FOREIGN KEY `fk_attendance_student`;
-ALTER TABLE `qresent`.`attendance` 
+ALTER TABLE `qresent`.`attendance`
 ADD INDEX `fk_attendance_student_idx` (`student_id` ASC) VISIBLE,
-DROP INDEX `fk_attendance_student_idx` ;
-;
-ALTER TABLE `qresent`.`attendance` 
+DROP INDEX `fk_attendance_student_idx`;
+
+ALTER TABLE `qresent`.`attendance`
 ADD CONSTRAINT `fk_attendance_student`
   FOREIGN KEY (`student_id`)
   REFERENCES `qresent`.`user` (`id`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
-
-
-
