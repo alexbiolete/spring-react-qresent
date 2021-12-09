@@ -17,3 +17,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button:disabled {
+  @apply bg-gray-100 border-2 border-gray-500 text-gray-500;
+}

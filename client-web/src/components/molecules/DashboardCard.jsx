@@ -10,7 +10,7 @@ class DashboardCard extends Component {
 
   render() {
     return (
-      <div className="w-full text-center">
+      <div className="overflow-hidden w-full bg-white border border-gray-200 transition ease-in-out duration-500 hover:shadow-lg rounded-lg text-center">
         <div className="overflow-hidden" style={{display: !!this.props.data.imgPath ? 'block' : 'none' }}>
           <img src={this.props.data.imgPath} alt="" className='transition ease-in-out duration-500 transform hover:scale-125' />
         </div>
