@@ -11,12 +11,13 @@ const Navbar = () => {
             <div className="flex-1 inline-flex md:hidden items-center justify-begin">
 
             </div>
-            <div className="flex-grow flex items-center justify-center">
+            <div className="flex-1 flex items-center">
               <Logo className="w-36 h-12 fill-current" />
             </div>
             <div className="flex-1 hidden md:flex justify-between md:justify-evenly space-x-2 md:space-x-6">
               <NavbarTabs />
             </div>
+            {/* TO DO: Responsive navbar menu */}
             <div className="flex-1 inline-flex items-center justify-end">
               <NavbarLink label="Log in" path="/login" />
               <NavbarLink label="Sign up" path="/signup" />
@@ -24,7 +25,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <nav className="flex md:hidden items-center justify-between space-x-2 md:space-x-6 fixed bottom-0 bg-white w-full h-16 border-t border-gray-200 shadow-sm">
+      <nav className="z-50 flex md:hidden items-center justify-between space-x-2 md:space-x-6 fixed bottom-0 bg-white w-full h-16 border-t border-gray-200 shadow-sm">
         <NavbarTabs />
       </nav>
     </>
