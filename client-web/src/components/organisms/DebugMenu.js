@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
 const DebugMenu = ({
@@ -7,9 +8,16 @@ const DebugMenu = ({
 }) => {
   return (
     <div className="bg-white px-4 py-3 rounded-lg shadow-sm space-y-2">
-      <span className="bg-red-200 px-2 py-1 rounded-md uppercase font-medium tracking-wider text-xs text-black">
-        {'Debug menu'}
-      </span>
+      <div className="flex space-x-1">
+        <span className="bg-red-200 px-2 py-1 rounded-md uppercase font-medium tracking-wider text-xs text-black">
+          {'Debug menu'}
+        </span>
+        <Link to="/dev" className="-mt-0.5">
+          <span className="border border-blue-500 px-2 py-1 rounded-md uppercase font-medium tracking-wider text-xs text-blue-700 transition ease-in-out duration-500 hover:bg-blue-100">
+            {'Dev URLs'}
+          </span>
+        </Link>
+      </div>
       <div className="flex items-center space-x-2">
         <span>
           {'Choose user type:'}
