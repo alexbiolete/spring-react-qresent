@@ -1,44 +1,43 @@
 import { Link, useParams } from 'react-router-dom';
 import ProfileSidebar from '../components/molecules/ProfileSidebar';
+import Table from '../components/organisms/Table';
 
-const Subject = ({
-  courses,
-  authenticatedUserName,
-  authenticatedUserUsername,
-  authenticatedUserEmail
+const User = ({
+  users,
+  subjects
 }) => {
-  let { subjectId } = useParams();
-  const coursesFromSubject = courses.filter(course => course.subjectId == subjectId);
+  let { userId } = useParams();
+  const user = users.find(user => user.id == userId);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       <div className="col-span-1">
         <ProfileSidebar
-          userName={authenticatedUserName}
-          userUsername={authenticatedUserUsername}
-          userEmail={authenticatedUserEmail}
+          userName={user.name}
+          userUsername={user.username}
+          UserEmail={user.email}
         />
       </div>
       <div className="col-span-1 sm:col-span-2 md:col-span-3">
         <div className="bg-white shadow-sm rounded-lg px-6 py-4 space-y-4">
           {/* <Table columns={columns} data={subjects} /> */}
-          <h1 className="uppercase font-semibold tracking-widest text-sm">{'Courses'}</h1>
+          <h1 className="uppercase font-semibold tracking-widest text-sm">{'Enrolled subjects'}</h1>
           <div className="flex flex-col space-y-2">
-            {coursesFromSubject.length > 0 ? (
-              coursesFromSubject.map((course) => {
+            {subjects.length > 0 ? (
+              subjects.map((subject) => {
                 return (
                   <Link
-                    to={`/course/${course.id}`}
+                    to={`/subject/${subject.id}`}
                     className="flex shadow-inner m-1 px-4 py-2 space-x-1 rounded-lg hover:bg-gray-100 transition ease-in-out duration-500"
                   >
-                    <h2 className="font-medium">{course.name}</h2>
-                    <p className="font-extralight">{'(ID: '}{course.id}{')'}</p>
+                    <h2 className="font-medium">{subject.name}</h2>
+                    <p className="font-extralight">{'(ID: '}{subject.id}{')'}</p>
                   </Link>
                 );
               })
             ) : (
               <span>
-                {'The user has not attended any course.'}
+                {'The user is not enrolled in any subject.'}
               </span>
             )}
           </div>
@@ -46,6 +45,6 @@ const Subject = ({
       </div>
     </div>
   );
-}
+};
 
-export default Subject;
+export default User;

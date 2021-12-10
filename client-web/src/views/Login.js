@@ -5,8 +5,9 @@ import WrapperForm from '../components/molecules/WrapperForm';
 import WrapperInput from '../components/molecules/WrapperInput';
 import ButtonPrimary from '../components/atoms/ButtonPrimary';
 import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
+import Logo from '../resources/Logo';
 
-export default function Login({ setUserType, setAuthenticatedUserName }) {
+export default function Login({ refreshPage }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -18,29 +19,20 @@ export default function Login({ setUserType, setAuthenticatedUserName }) {
       };
     axios.post("http://localhost:8081/user/login", user)
       .then(response => {
-        if (response.data.role == "student") {
-          history.push("/student/dashboard");
-          setUserType("student");
+        if (response.data.username == "" && response.data.password == "") {
+          history.push("/login");
+          refreshPage();
         }
-
-        if (response.data.role == "teacher") {
-          history.push("/professor/dashboard");
-          setUserType("professor");
-        }
-
-        if (response.data.role == "admin") {
-          history.push("/admin/dashboard");
-          setUserType("admin");
-        }
-
-        if (response.data.username == "" && response.data.password == "")
-            history.push("/login");
 
         localStorage.setItem('user_id', response.data.id);
         localStorage.setItem('user_name', response.data.name);
         localStorage.setItem('user_username', response.data.username);
         localStorage.setItem('user_email', response.data.email);
-        })
+        localStorage.setItem('user_role', response.data.role);
+
+        history.push("/");
+        refreshPage();
+      })
       .catch((response) => {
         history.push("/signup");
       });
@@ -51,6 +43,7 @@ export default function Login({ setUserType, setAuthenticatedUserName }) {
       <form>
         <div className="w-full px-4 py-5 bg-white sm:p-6">
           <div className="flex flex-col items-center space-y-4">
+            <Logo className="w-80 h-32 fill-current" />
             <WrapperInput
               id="username"
               title="Username"

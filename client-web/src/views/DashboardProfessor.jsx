@@ -4,33 +4,33 @@ import ideaImage from '../resources/img/idea.jpg';
 
 
 class DashboardProfessor extends Component {
-  constructor (props){
+  constructor (props) {
     super(props);
-    this.state={
+    this.state = {
       tabs: [
         {
           title: '',
-          button: 'Incepe Cursul',
+          button: 'Begin course',
           handler: this.startLectureHandler,
           disabled: false,
           imgPath: ideaImage
         },
         {
           title: '',
-          button: 'Verificare Activitate',
+          button: 'Check attendance',
           disabled:true,
           imgPath: ideaImage
         },
         {
           title: '',
-          button: 'Incheie Cursul',
+          button: 'End course',
           handler: this.finishLectureHandler,
           disabled: true,
           imgPath: ideaImage
         },
         {
           title: '',
-          button: 'Statistici',
+          button: 'Statistics',
           handler: this.statisticsHandler,
           imgPath: ideaImage
         },
@@ -41,7 +41,7 @@ class DashboardProfessor extends Component {
         },
         {
           title: '',
-          button: 'Setari Curs',
+          button: 'Settings',
           handler: this.settingsHandler,
           imgPath: ideaImage
         },
@@ -83,7 +83,7 @@ class DashboardProfessor extends Component {
 
     render() {
       return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           <DashboardCard data = {this.state.tabs[0]}/>
           <DashboardCard data = {this.state.tabs[1]}/>
           <DashboardCard data = {this.state.tabs[2]}/>

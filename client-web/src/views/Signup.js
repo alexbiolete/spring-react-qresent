@@ -5,8 +5,9 @@ import WrapperForm from '../components/molecules/WrapperForm';
 import WrapperInput from '../components/molecules/WrapperInput';
 import ButtonPrimary from '../components/atoms/ButtonPrimary';
 import LinkOutlineSecondary from '../components/atoms/LinkOutlineSecondary';
+import Logo from '../resources/Logo';
 
-export default function Signup() {
+export default function Signup({ refreshPage }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -65,7 +66,8 @@ export default function Signup() {
     }
 
     if(verify == true) {
-      history.push("/dashboard");
+      history.push("/");
+      refreshPage();
     }
 
   axios.post("http://localhost:8081/user", user).then((response) => console.log(response));
@@ -77,6 +79,7 @@ export default function Signup() {
       <form>
         <div className="w-full px-4 py-5 bg-white sm:p-6">
           <div className="flex flex-col items-center space-y-4">
+            <Logo className="w-80 h-32 fill-current" />
             <WrapperInput
               id="name"
               title="Name"
@@ -110,22 +113,24 @@ export default function Signup() {
               required
             />
 
-            <label>
-              <input
-                type="checkbox"
-                checked={checked1}
-                onChange={handleChange1}
-              />
-              Teacher account
-            </label><br />
-            <label>
-              <input
-                type="checkbox"
-                checked={checked2}
-                onChange={handleChange2}
-              />
-              Student account
-            </label>
+            <div className="flex flex-col md:flex-row md:space-x-4 text-gray-600">
+              <label className="text-xs flex items-center space-x-1">
+                <input
+                  type="checkbox"
+                  checked={checked1}
+                  onChange={handleChange1}
+                />
+                <span className="tracking-wide">{'Teacher account'}</span>
+              </label>
+              <label className="text-xs flex items-center space-x-1">
+                <input
+                  type="checkbox"
+                  checked={checked2}
+                  onChange={handleChange2}
+                />
+                <span className="tracking-wide">{'Student account'}</span>
+              </label>
+            </div>
           </div>
         </div>
 

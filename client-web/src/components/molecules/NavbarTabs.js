@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import NavbarTabLink from '../atoms/NavbarTabLink';
 
-const NavbarTabs = ({ userType }) => {
+const NavbarTabs = () => {
 
   return (
     <>
@@ -25,7 +25,7 @@ const NavbarTabs = ({ userType }) => {
             </svg>
           </Fragment>
         }
-        path={`/${userType}/dashboard`}
+        path="/dashboard"
       />
       <NavbarTabLink
         label="Profile"

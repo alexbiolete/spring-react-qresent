@@ -17,8 +17,13 @@ const DebugMenu = ({
             {'Dev URLs'}
           </span>
         </Link>
+        <Link to="/validate-qr" className="-mt-0.5">
+          <span className="border border-blue-500 px-2 py-1 rounded-md uppercase font-medium tracking-wider text-xs text-blue-700 transition ease-in-out duration-500 hover:bg-blue-100">
+            {'Validate QR'}
+          </span>
+        </Link>
       </div>
-      <div className="flex items-center space-x-2">
+      {/* <div className="flex items-center space-x-2">
         <span>
           {'Choose user type:'}
         </span>
@@ -31,7 +36,7 @@ const DebugMenu = ({
           options={userTypes}
           className="border-b-2 border-gray-300 hover:border-blue-500 transition ease-in-out duration-300"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

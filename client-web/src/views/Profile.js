@@ -1,8 +1,14 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import ProfileSidebar from '../components/molecules/ProfileSidebar';
 import Table from '../components/organisms/Table';
 
-const Profile = ({ subjects, authenticatedUserName, authenticatedUserUsername, authenticatedUserEmail }) => {
+const Profile = ({
+  subjects,
+  authenticatedUserName,
+  authenticatedUserUsername,
+  authenticatedUserEmail
+}) => {
   const columns = useMemo(
     () => [
       {
@@ -18,41 +24,38 @@ const Profile = ({ subjects, authenticatedUserName, authenticatedUserUsername, a
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       <div className="col-span-1">
-        <div className="rounded-lg shadow p-4 space-y-4">
-          <div className="mx-auto rounded-full shadow-md w-32 h-32 flex justify-center items-center">
-            <span className="font-semibold uppercase text-5xl">
-              {authenticatedUserName.substring(0, 2)}
-            </span>
-          </div>
-          <div>
-            <h1 className="font-semibold uppercase text-center text-xl">
-              {authenticatedUserName}
-            </h1>
-            <h2 className="font-light tracking-wider lowercase text-center text-lg">
-              {'@'}{authenticatedUserUsername}
-            </h2>
-          </div>
-          <div className="flex items-center space-x-1 px-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <span className="tracking-wide text-sm">
-              {authenticatedUserEmail}
-            </span>
+        <ProfileSidebar
+          userName={authenticatedUserName}
+          userUsername={authenticatedUserUsername}
+          userEmail={authenticatedUserEmail}
+        />
+      </div>
+      <div className="col-span-1 sm:col-span-2 md:col-span-3">
+        <div className="bg-white shadow-sm rounded-lg px-6 py-4 space-y-4">
+          {/* <Table columns={columns} data={subjects} /> */}
+          <h1 className="uppercase font-semibold tracking-widest text-sm">{'Enrolled subjects'}</h1>
+          <div className="flex flex-col space-y-2">
+            {subjects.length > 0 ? (
+              subjects.map((subject) => {
+                return (
+                  <Link
+                    to={`/subject/${subject.id}`}
+                    className="flex shadow-inner m-1 px-4 py-2 space-x-1 rounded-lg hover:bg-gray-100 transition ease-in-out duration-500"
+                  >
+                    <h2 className="font-medium">{subject.name}</h2>
+                    <p className="font-extralight">{'(ID: '}{subject.id}{')'}</p>
+                  </Link>
+                );
+              })
+            ) : (
+              <span>
+                {'The user is not enrolled in any subject.'}
+              </span>
+            )}
           </div>
         </div>
-      </div>
-      <div className="col-span-1 md:col-span-3">
-        {/* <Table columns={columns} data={subjects} /> */}
-        {subjects.map((subject) => {
-          return (
-            <div>
-              <Link to={`/subject/${subject.id}`}>{subject.name}</Link>
-            </div>
-          );
-        })}
       </div>
     </div>
   );
