@@ -50,6 +50,8 @@ class DashboardProfesor extends Component {
 
   qrScanHandler = () => {
     console.log('Open Scanner!');
+    // let path = 'generate-qr';
+    // this.props.history.push(path);
   }
 
   statisticsHandler = () => {

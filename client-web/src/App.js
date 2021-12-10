@@ -9,6 +9,7 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Profile from './views/Profile';
 import User from './views/User';
+import GenerateQR from './views/GenerateQR';
 import ValidateQR from './views/ValidateQR';
 import Subject from './views/Subject';
 import Course from './views/Course';
@@ -31,7 +32,7 @@ const App = () => {
 
   // Used when submitting an attendance
   const attendance = {
-    courseId: 1,
+    courseId: 3,
     studentId: parseInt(authenticatedUserId)
   };
 
@@ -204,6 +205,20 @@ const App = () => {
               <Development />
             </Auth>
           </Route>
+          {/* <Route path="/generate-qr" exact>
+            <Auth
+              authenticatedUserName={authenticatedUserName}
+              setAuthenticatedUserName={setAuthenticatedUserName}
+              refreshPage={refreshPage}
+            >
+              <GenerateQR
+                dbApiUrl={dbApiUrl}
+                attendance={attendance}
+                attendances={attendances}
+                setAttendances={setAttendances}
+              />
+            </Auth>
+          </Route> */}
           <Route path="/validate-qr" exact>
             <Auth
               authenticatedUserName={authenticatedUserName}
@@ -240,6 +255,7 @@ const App = () => {
             >
               <Course
                 attendances={attendances}
+                courses={courses}
                 users={users}
                 authenticatedUserName={authenticatedUserName}
                 authenticatedUserUsername={authenticatedUserUsername}

@@ -4,7 +4,6 @@ const ValidateQR = ({ dbApiUrl, attendance, attendances, setAttendances }) => {
   const [successfulGeneration, setSuccessfulGeneration] = useState(false);
 
   useEffect(() => {
-
     generateQR();
   }, []);
 
@@ -21,7 +20,7 @@ const ValidateQR = ({ dbApiUrl, attendance, attendances, setAttendances }) => {
     console.log(response);
     console.log(data);
 
-    if (response.status == 200) {
+    if (response.status < 400) {
       setSuccessfulGeneration(true);
     } else {
       setSuccessfulGeneration(false);

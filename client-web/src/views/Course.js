@@ -6,6 +6,7 @@ import ProfileSidebar from '../components/molecules/ProfileSidebar';
 
 const Course = ({
   attendances,
+  courses,
   users,
   authenticatedUserName,
   authenticatedUserUsername,
@@ -16,8 +17,17 @@ const Course = ({
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
 
-  const exportToCSV = (attendances, fileName) => {
-    const ws = XLSX.utils.json_to_sheet(attendances);
+  const map1 = new Map();
+  const map2 = new Map();
+  courses.forEach(course => map1.set(course.id, course.name));
+  users.forEach(user => map2.set(user.id, user.name));
+  attendances.forEach(function (attendance) {
+    attendance.courseName = map1.get(attendance.courseId);
+    attendance.studentName = map2.get(attendance.studentId);
+  });
+
+  const exportToCSV = (map1, fileName) => {
+    const ws = XLSX.utils.json_to_sheet(map1);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     const data = new Blob([excelBuffer], { type: fileType });
